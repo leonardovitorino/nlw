@@ -26,7 +26,7 @@ map.on('click', (event) => {
     marker && map.removeLayer(marker)
 
     // add icon layer
-    marker = L.marker ([lat, lng], { icon }).addTo(map)
+    marker = L.marker([lat, lng], { icon }).addTo(map)
 })
 
 // adicionar o campo de fotos
@@ -39,22 +39,22 @@ function addPhotoField() {
     const newFieldContainer = fieldsContainer[fieldsContainer.length - 1].cloneNode(true)
     // verificar se o campo está vazio, se sim, não adicionar ao container de imagens
     const input = newFieldContainer.children[0]
-    
-    if(input.value == "") {
+
+    if (input.value == "") {
         return
     }
     // limpar o campo antes de adicionar ao container de imagens
     input.value = ""
     // adicionar o clone ao container de #images
     container.appendChild(newFieldContainer)
-}  
+}
 
 function deleteField(event) {
     const span = event.currentTarget
 
     const fieldsContainer = document.querySelectorAll('.new-upload')
 
-    if(fieldsContainer.length < 2) {
+    if (fieldsContainer.length < 2) {
         // limpar o valor do campo
         span.parentNode.children[0].value = ""
         return
@@ -68,16 +68,27 @@ function deleteField(event) {
 function toggleSelect(event) {
     // retirar a class .active (dos botões)
     document.querySelectorAll('.button-select button')
-    .forEach(function (button) {
-        button.classList.remove('active')}) 
-    
+        .forEach(function (button) {
+            button.classList.remove('active')
+        })
+
     // colocar a class .active dos botões cliados
-        const button = event.currentTarget
-        button.classList.add('active')
+    const button = event.currentTarget
+    button.classList.add('active')
 
     // atualizar o meu input hidden com o valor selecionado
     const input = document.querySelector('[name="open_on_weekends"]')
 
-    input.value = button.dataset.value    
+    input.value = button.dataset.value
 
+}
+
+function validate(event) {
+
+    // validar se lat e lng estão preenchidos
+    const needsLatAndLng = true;
+    if (needsLatAndLng) {
+        event.preventDefault()
+        alert('Selecione um ponto no mapa')
+    }
 }
